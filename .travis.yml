@@ -8,13 +8,21 @@ install:
   - docker-compose build
 
 script:
-  - docker-compose up -d
+  - echo "no tests!" #Tests go here
+  - sed -i -e 's/\r$/\n/' installDependencies.sh
+  - sed -i -e 's/\r$/\n/' startServers.sh
+  - sed -i -e 's/\r$/\n/' stopServers.sh #correct files endings
+  - zip -r latest *
+  - mkdir -p dpl_cd_upload
+  - mv latest.zip dpl_cd_upload/latest.zip 
 
 deploy:
   - provider: s3
     access_key_id: $ACCESS_KEY
     secret_access_key: $SECRET_KEY
     bucket: "chatapp-s3deployment"
+    region: sa-east-1
+    upload-dir: latest
     # rest of S3 deployment for MyApp.zip
     # ⋮
   - provider: codedeploy
@@ -25,4 +33,5 @@ deploy:
     bundle_type: zip
     application: ChatApp
     deployment_group: ChatApp-deploymentgroup
+    region: sa-east-1
     wait_until_deployed: true
