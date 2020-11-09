@@ -8,30 +8,30 @@ install:
   - docker-compose build
 
 script:
-  - echo "no tests" #Tests go here
-  - sed -i -e 's/\r$/\n/' scripts/installDependencies.sh
-  - sed -i -e 's/\r$/\n/' scripts/startServers.sh
-  - sed -i -e 's/\r$/\n/' scripts/stopServers.sh #correct files endings
-  - zip -r ChatApp *
-  - mkdir -p latest
-  - mv ChatApp.zip latest/ChatApp.zip
+	- echo "no tests" #Tests go here
+	- sed -i -e 's/\r$/\n/' scripts/installDependencies.sh
+	- sed -i -e 's/\r$/\n/' scripts/startServers.sh
+	- sed -i -e 's/\r$/\n/' scripts/stopServers.sh #correct files endings
+	- zip -r latest *
+	- mkdir -p dpl_cd_upload
+	- mv latest.zip dpl_cd_upload/latest.zip
 
 deploy:
-  - provider: s3
-    access_key_id: $ACCESS_KEY
-    secret_access_key: $SECRET_KEY
-    bucket: "chatapp-s3deployment"
-    region: us-east-1
-    upload-dir: latest
-    # rest of S3 deployment for MyApp.zip
-    # ⋮
-  - provider: codedeploy
-    access_key_id: $ACCESS_KEY
-    secret_access_key: $SECRET_KEY
-    bucket: "chatapp-s3deployment"
-    key: latest/ChatApp.zip
-    bundle_type: zip
-    application: ChatApp
-    deployment_group: ChatApp-deploymentgroup
-    region: us-east-1
-    wait_until_deployed: true
+	- provider: s3
+		access_key_id: $ACCESS_KEY
+		secret_access_key: $SECRET_KEY
+		local_dir: dpl_cd_upload
+		skip_cleanup: true
+		bucket: "chatapp-s3deployment"
+		region: us-east-1
+		upload-dir: latest
+	- provider: codedeploy
+		access_key_id: $ACCESS_KEY
+		secret_access_key: $SECRET_KEY
+		bucket: "chatapp-s3deployment"
+		key: latest.zip
+		bundle_type: zip
+		application: ChatApp
+		deployment_group: ChatApp-deploymentgroup
+		region: us-east-1
+		wait_until_deployed: true
