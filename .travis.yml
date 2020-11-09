@@ -1,0 +1,30 @@
+lenguage: node_js
+
+sudo: required
+services:
+  - docker 
+
+install:
+  - npm install mocha
+  - docker-compose build
+
+script:
+  - docker-compose up -d
+  - npm run test
+
+deploy:
+  - provider: s3
+    access_key_id: $ACCESS_KEY
+    secret_access_key: $SECRET_KEY
+    bucket: "chatapp-s3deployment"
+    # rest of S3 deployment for MyApp.zip
+    # ⋮
+  - provider: codedeploy
+    access_key_id: $ACCESS_KEY
+    secret_access_key: $SECRET_KEY
+    bucket: "chatapp-s3deployment"
+    key: latest/ChatApp.zip
+    bundle_type: zip
+    application: ChatApp
+    deployment_group: ChatApp-deploymentgroup
+    wait_until_deployed: true
