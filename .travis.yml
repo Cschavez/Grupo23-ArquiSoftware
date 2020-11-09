@@ -18,20 +18,20 @@ script:
 
 deploy:
 	- provider: s3
-	access_key_id: $ACCESS_KEY
-	secret_access_key: $SECRET_KEY
-	local_dir: dpl_cd_upload
-	skip_cleanup: true
-	bucket: "chatapp-s3deployment"
-	region: us-east-1
-	upload-dir: latest
+		access_key_id: $ACCESS_KEY
+		secret_access_key: $SECRET_KEY
+		local_dir: dpl_cd_upload
+		skip_cleanup: true
+		bucket: "chatapp-s3deployment"
+		region: us-east-1
+		upload-dir: latest
 	- provider: codedeploy
-	access_key_id: $ACCESS_KEY
-	secret_access_key: $SECRET_KEY
-	bucket: "chatapp-s3deployment"
-	key: latest.zip
-	bundle_type: zip
-	application: ChatApp
-	deployment_group: ChatApp-deploymentgroup
-	region: us-east-1
-	wait_until_deployed: true
+		access_key_id: $ACCESS_KEY
+		secret_access_key: $SECRET_KEY
+		bucket: "chatapp-s3deployment"
+		key: latest.zip
+		bundle_type: zip
+		application: ChatApp
+		deployment_group: ChatApp-deploymentgroup
+		region: us-east-1
+		wait_until_deployed: true
