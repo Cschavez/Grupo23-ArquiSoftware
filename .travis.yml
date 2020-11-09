@@ -19,7 +19,7 @@ deploy:
     access_key_id: $ACCESS_KEY
     secret_access_key: $SECRET_KEY
     bucket: "chatapp-s3deployment"
-    region: sa-east-1
+    region: us-east-1
     upload-dir: latest
     # rest of S3 deployment for MyApp.zip
     # ⋮
@@ -31,5 +31,5 @@ deploy:
     bundle_type: zip
     application: ChatApp
     deployment_group: ChatApp-deploymentgroup
-    region: sa-east-1
+    region: us-east-1
     wait_until_deployed: true
