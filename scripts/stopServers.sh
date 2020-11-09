@@ -1,2 +1,2 @@
 #!/bin/bash
-docker_boot.stop
+docker-compose -f /home/ubuntu/Grupo23-ArquiSoftware/docker-compose.yaml down
