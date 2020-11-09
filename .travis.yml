@@ -12,6 +12,9 @@ script:
   - sed -i -e 's/\r$/\n/' scripts/installDependencies.sh
   - sed -i -e 's/\r$/\n/' scripts/startServers.sh
   - sed -i -e 's/\r$/\n/' scripts/stopServers.sh #correct files endings
+  - zip -r ChatApp *
+  - mkdir -p latest
+  - mv ChatApp.zip latest/ChatApp.zip
 
 deploy:
   - provider: s3
