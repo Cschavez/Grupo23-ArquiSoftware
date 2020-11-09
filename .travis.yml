@@ -5,12 +5,10 @@ services:
   - docker 
 
 install:
-  - npm install mocha
   - docker-compose build
 
 script:
   - docker-compose up -d
-  - npm run test
 
 deploy:
   - provider: s3
