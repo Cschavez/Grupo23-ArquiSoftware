@@ -1,0 +1,22 @@
+version: 0.0
+os: linux
+files:
+  - source: scripts
+    destination: /home/ubuntu/iic2173-proyecto-semestral-grupo23
+permissions:
+  - object: scripts
+    pattern: "**"
+    owner: ubuntu
+hooks:
+  BeforeInstall:
+    - location: scripts/installDependencies.sh
+      timeout: 300
+      runas: ubuntu
+  ApplicationStop:
+    - location: scripts/stopServers.sh
+      timeout: 300
+      runas: ubuntu
+  ApplicationStart:
+    - location: scripts/startServers.sh
+      timeout: 300
+      runas: ubuntu
