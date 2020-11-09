@@ -2,7 +2,7 @@ lenguage: node_js
 
 sudo: required
 services:
-  - docker 
+  	- docker 
 
 install:
 	- docker-compose build
