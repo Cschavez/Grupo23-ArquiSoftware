@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 files:
   - source: scripts
-    destination: /home/ubuntu/iic2173-proyecto-semestral-grupo23
+    destination: /home/ubuntu/Grupo23-ArquiSoftware
 permissions:
   - object: scripts
     pattern: "**"
