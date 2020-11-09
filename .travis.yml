@@ -5,7 +5,7 @@ services:
   - docker 
 
 install:
-  - docker-compose build
+	- docker-compose build
 
 script:
   - echo "no tests" #Tests go here
