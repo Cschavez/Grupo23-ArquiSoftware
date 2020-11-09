@@ -12,7 +12,6 @@ script:
   - sed -i -e 's/\r$/\n/' scripts/installDependencies.sh
   - sed -i -e 's/\r$/\n/' scripts/startServers.sh
   - sed -i -e 's/\r$/\n/' scripts/stopServers.sh #correct files endings
-  - zip -r latest *
 
 deploy:
   - provider: s3
