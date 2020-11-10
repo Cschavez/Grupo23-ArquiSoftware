@@ -1,9 +1,8 @@
 var chai = require('chai');
 let chaiHttp = require('chai-http');
-const assert = require('assert');
+let assert = require('assert');
 let rooms = require('../src/utils/rooms');
 let users = require('../src/utils/users');
-const { UserAgent } = require('amazon-cognito-identity-js');
 
 let should = chai.should();
 chai.use(chaiHttp);
