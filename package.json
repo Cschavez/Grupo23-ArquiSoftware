@@ -14,15 +14,24 @@
     "test": "mocha"
   },
   "dependencies": {
+    "amazon-cognito-identity-js": "^4.5.3-unstable.1",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "jwk-to-pem": "^2.0.4",
     "moment": "^2.24.0",
+    "node-fetch": "^2.6.1",
     "pg": "^8.3.3",
     "sequelize": "^6.3.5",
     "socket.io": "^2.3.0"
   },
   "devDependencies": {
-    "mocha": "^8.2.0",
-    "nodemon": "^2.0.2"
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "mocha": "^8.2.1",
+    "nodemon": "^2.0.2",
+    "request": "^2.88.2"
   },
   "engines": {
     "node": "10.x || 12.x",

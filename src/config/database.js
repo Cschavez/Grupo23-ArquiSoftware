@@ -5,18 +5,26 @@ const config = {
     dialect: process.env.DB_DIALECT || 'postgres',
     database: process.env.DB_NAME,
     host: process.env.DB_HOST || '127.0.0.1',
+    port: process.env.DB_PORT || 5432,
   },
   development: {
-    extend: 'default',
-    database: process.env.DB_NAME || 'iic2513template_dev',
+    username: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+    dialect: process.env.DB_DIALECT || 'postgres',
+    database: process.env.DB_NAME,
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
   },
   test: {
-    extend: 'default',
-    database: 'iic2513template_test',
+    username: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+    dialect: process.env.DB_DIALECT || 'postgres',
+    database: process.env.DB_NAME,
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
   },
   production: {
     extend: 'default',
-    use_env_variable: 'DATABASE_URL',
   },
 };
 
