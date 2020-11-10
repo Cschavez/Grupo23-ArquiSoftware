@@ -10,13 +10,16 @@ branches:
     - master
 
 install:
+- docker-compose build
 - npm install mocha chai 
 - npm install request 
 - npm install chai-http 
 
 
 script:
+- docker-compose up -d 
 - npm test
+- docker-compose down
 - echo "success tests!"
 - sed -i -e 's/\r$/\n/' scripts/installDependencies.sh
 - sed -i -e 's/\r$/\n/' scripts/startServers.sh
