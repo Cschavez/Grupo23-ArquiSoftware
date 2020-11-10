@@ -1,9 +1,9 @@
 const orm = require('../models');
+const fetch = require('node-fetch');
 
 // Join user to chat
-async function userJoin(socket, username, room) {
-  console.log("la room es", room);
-  const user = await orm.User.create({RoomId: room, socket, username });
+async function userJoin(socket, username, room, mail) {
+  const user = await orm.User.create({RoomId: room, socket, username, mail });
   return user.toJSON();
 }
 
@@ -33,11 +33,22 @@ async function roomsGet() {
   return rooms.toJSON();
 }
 
+async function sendMail(username) {
+  const user = await orm.User.findOne({where: { username }});
+  await fetch('https://b6z5zn3g0k.execute-api.us-east-1.amazonaws.com/default/sendMail', {
+    method: 'post',
+    body:    JSON.stringify({email: user.mail}),
+    headers: { 'Content-Type': 'application/json' },
+  });
+
+}
+
 
 module.exports = {
   userJoin,
   getCurrentUser,
   userLeave,
   getRoomUsers,
-  roomsGet
+  roomsGet,
+  sendMail
 };

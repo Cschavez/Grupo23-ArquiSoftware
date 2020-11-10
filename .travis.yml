@@ -3,12 +3,22 @@ lenguage: node_js
 sudo: required
 services:
   - docker 
+branches:
+  only:
+    - master
 
 install:
-- echo "nothing to install!"
+- docker-compose build
+- npm install mocha chai --save-dev
+- npm install request --save-dev
+- npm install chai-http --save-dev
+
 
 script:
-- echo "no tests" #Tests go here
+- docker-compose up -d 
+- npm test
+- docker-compose down
+- echo "success tests!"
 - sed -i -e 's/\r$/\n/' scripts/installDependencies.sh
 - sed -i -e 's/\r$/\n/' scripts/startServers.sh
 - sed -i -e 's/\r$/\n/' scripts/stopServers.sh #correct files endings
@@ -39,3 +49,5 @@ deploy:
   deployment_group: ChatApp-deploymentgroup
   region: us-east-1
   wait_until_deployed: true
+  on:
+    branch: master
