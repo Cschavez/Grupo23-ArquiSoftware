@@ -1,4 +1,4 @@
-const orm = require('../models');
+const orm = require("../models");
 
 async function roomsGet() {
   const rooms = await orm.Room.findAll();
@@ -6,8 +6,8 @@ async function roomsGet() {
 }
 
 async function roomGet(id) {
-    const room = await orm.Room.findByPk(id);
-    return room;
+  const room = await orm.Room.findByPk(id);
+  return room;
 }
 
 async function roomsPost(name) {
@@ -15,9 +15,15 @@ async function roomsPost(name) {
   return room.toJSON();
 }
 
+async function roomDelete(id) {
+  const room = await orm.Room.findByPk(id);
+  await room.destroy();
+  return room;
+}
+
 module.exports = {
-    roomsGet,
-    roomsPost,
-    roomGet,
+  roomsGet,
+  roomsPost,
+  roomGet,
+  roomDelete,
 };
-  

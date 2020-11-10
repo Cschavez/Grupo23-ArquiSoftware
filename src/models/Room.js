@@ -5,6 +5,7 @@ module.exports = (sequelize, DataTypes) => {
 
   Room.associate = function associate(models) {
     models.Room.hasMany(models.Message);
+    models.Room.hasMany(models.Injection, { foreignKey: 'roomId' });
   };
   sequelize.sync();
   return Room;

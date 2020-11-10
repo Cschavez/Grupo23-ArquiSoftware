@@ -1,4 +1,4 @@
-# IIC2173 - Entrega 1 - Grupo 23
+# IIC2173 - Entrega 2 - Grupo 23
 
 ## Dominio
 
@@ -6,23 +6,44 @@
 
 ## Sección mínima
 
-### BackEnd
+### Autenticación
 
-* **RF1** Completo
-* **RF2** Completo
-* **RF3** Completo
-* **RF4** Completo
-* **RF5** Asegurado con Let's Encrypt y redirije HTTP a HTTPS
+### CI/CD
 
-### FrontEnd
+### Documentación
 
-* **RF5 y RF6** Completo
+Los documentos se encuentran en la carpeta docs
 
-## Mensajes en tiempo real
+- \*\*RF1 Debe documentar con diagramas de componentes el sistema a fines de esta entrega. (LOGRADO)
 
-* **RF1 - Mostrar mensajes sin recargar la página:** se realiza usando una React App en el frontend, no hay ninguna limitación.
-* **RF2 - Notificación en caso de que el usuario sea etiquetado:** cuando un usuario es llamado con @ se le envia un correo al usuario etiquetado. En el frontend, si algún mensaje contiene '@' antes del nombre de un usuario, se le envía un socket al backend indicando que hay una mención con el nombre de usuario. En el backend se busca el mail del usuario y se manda un post a un endpoint de API Gateway. Este último lo enruta a una función lambda que utiliza el servicio mailer de Sendgrid. Así se envía un request para que finalmente se envie el correo. Por lo tanto, las herramientas utilizadas son API Gateway, Sendgrid y Lambda.
+- \*\*RF2 Debe documentar con diagramas de flujo los procesos de log in/sign up, envío de mensajes (considerando todos los procesos que ocurran a partirde ahí). (LOGRADO)
 
-## Trabajo delegado
+- \*\*RF3 Debe documentar con diagramas el proceso de despliegue. (LOGRADO)
 
-* **Función Lambda para enviar mails:** cuando un usuario es llamado con @ se le envia un correo al usuario etiquetado. En el frontend, si algún mensaje contiene '@' antes del nombre de un usuario, se le envía un socket al backend indicando que hay una mención con el nombre de usuario. En el backend se busca el mail del usuario y se manda un post a un endpoint de API Gateway. Este último lo enruta a una función lambda que utiliza el servicio mailer de Sendgrid. Así se envía un request para que finalmente se envie el correo. Por lo tanto, las herramientas utilizadas son API Gateway, Sendgrid y Lambda.
+- \*\*RF4 Debe documentar todas las posibles llamadas a sus APIs con algún estandar (Postman, Swagger u otra) (LOGRADO) (https://documenter.getpostman.com/view/10613962/TVejiqnR)
+
+## Sección Variable
+
+### CRUD Admin.
+
+- \*\*RF1 Se implementa un menu para acceder a la información de los usuarios. Se puede revisar y modificar la información de éstos y bloquear el acceso("borrar"). De ser necesario, debe interactuar con el sistema de auth implementado en la sección de Autenticación. (LOGRADO)
+
+- \*\*RF2 Se implementa el menú para manejar grupos. Se pueden cerrar grupos, dejar públicos o privados. (se pueden crear salas públicas, y eliminar salas)
+
+- \*\*RF3 Se implementa el CRUD mensajes. Como admin puede enviar mensajes en grupos, ver y modificar los mensajes e incluye la censura de ellos. Almodificar o censurar los mensajes no se puede perder el mensaje original. (NO LOGRADO)
+
+### CSS/Javascript injection
+
+### Encriptación
+
+- **RF1: Salas Privadas**
+  Se crearon salas privadas donde un usuario deberá hacer click en el nombre y esperar a que el creador de aquella sala le de permiso para entrar. El permiso se manda como un mensaje en el chat que solo el creador puede ver y tiene dos botones: 'Aceptar' y 'Rechazar'. Si acepta, el usuario que pidió entrar será unido a la sala.
+
+- **RF2: Encriptación end-to-end**
+  Se implementó un servidor 'Vault' con una Transit Secrets Engine que funcionará como un servicio. Funciona de la siguiente manera:
+
+  - Enprimer lugar se crea una policy para encriptar y desencriptar mensajes sin guardarlos en la máquina y se habilita la 'transit secret engine'.
+  - Luego, dentro de la app se manda un request http 'pidiendo' una token de acceso como cliente al servidor de vault. Esta token solo permite encriptar y desencriptar algun mensaje, no permite borrar o crear 'secretos' ni modificar el servidor. El request utiliza una llave 'root' que permite crear tokens de cliente. Esta se encuentra en el docker-compose como `VAULT_TOKEN`.
+  - Una vez teniendo la token se procede a realizar un último request http 'pidiendo' encriptar un mensaje a lo que el servidor de vault enviará como respuesta el mensaje codificado. Este mensaje es guardado en la BDD.
+
+  Todo lo anterior se lleva a cabo en el backend y al frontend solo se envían los mensajes desencriptados.
