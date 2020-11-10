@@ -1,4 +1,5 @@
 lenguage: node_js
+node
 
 sudo: required
 services:
@@ -9,9 +10,9 @@ branches:
 
 install:
 - docker-compose build
-- npm install mocha chai --save-dev
-- npm install request --save-dev
-- npm install chai-http --save-dev
+- npm install mocha chai 
+- npm install request 
+- npm install chai-http 
 
 
 script:
