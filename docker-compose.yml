@@ -5,11 +5,11 @@ services:
     build: .
     environment:
       NODE_ENV: production
-      DB_HOST: database-arqui.cccg1xxfc2ht.us-east-1.rds.amazonaws.com
-      DB_PORT: 5432
-      DB_NAME: postgres
-      DB_USERNAME: postgres
-      DB_PASSWORD: postgres
+      DB_HOST: $DB_HOST
+      DB_PORT: $DB_PORT
+      DB_NAME: $DB_NAME
+      DB_USERNAME: $DB_USERNAME
+      DB_PASSWORD: $DB_PASSWORD
       PORT: 3000
     ports:
       - "3000:3000"
