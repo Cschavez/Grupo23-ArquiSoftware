@@ -19,7 +19,7 @@ exports.login = function(req, res){
  exports.validate_token = function(req, res){
     let validate = authService.Validate(req.body.token, function(err, result){
         if(err)
-            es.status(400).send(err.message);
+            res.status(400).send(err.message);
         res.send(result);
     })
 }
