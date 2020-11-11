@@ -9,14 +9,14 @@ permissions:
     owner: ubuntu
 hooks:
   BeforeInstall:
-    - location: installDependencies.sh
+    - location: scripts/installDependencies.sh
       timeout: 300
       runas: ubuntu
   ApplicationStop:
-    - location: stopServers.sh
+    - location: scripts/stopServers.sh
       timeout: 300
       runas: ubuntu
   ApplicationStart:
-    - location: startServers.sh
+    - location: scripts/startServers.sh
       timeout: 300
       runas: ubuntu
