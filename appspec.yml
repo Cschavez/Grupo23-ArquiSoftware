@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 files:
   - source: scripts
-    destination: /home/ubuntu/Grupo23-ArquiSoftware
+    destination: /home/ubuntu/Grupo23-ArquiSoftware/scripts
 permissions:
   - object: scripts
     pattern: "**"
