@@ -2,21 +2,21 @@ version: 0.0
 os: linux
 files:
   - source: scripts
-    destination: /home/ubuntu/Grupo23-ArquiSoftware/scripts
+    destination: /home/ubuntu/Grupo23-ArquiSoftware/
 permissions:
   - object: scripts
     pattern: "**"
     owner: ubuntu
 hooks:
   BeforeInstall:
-    - location: scripts/installDependencies.sh
+    - location: installDependencies.sh
       timeout: 300
       runas: ubuntu
   ApplicationStop:
-    - location: scripts/stopServers.sh
+    - location: stopServers.sh
       timeout: 300
       runas: ubuntu
   ApplicationStart:
-    - location: scripts/startServers.sh
+    - location: startServers.sh
       timeout: 300
       runas: ubuntu
