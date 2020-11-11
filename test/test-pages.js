@@ -34,7 +34,7 @@ describe("Unit Tests - Rooms", () => {
     })
 
 })
- 
+  
 //INTEGRATION TESTS
 
     // describe('Integration Test - Auth Register', () => {
