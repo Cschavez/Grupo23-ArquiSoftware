@@ -37,21 +37,21 @@ describe("Unit Tests - Rooms", () => {
 
 //INTEGRATION TESTS
 
-    describe('Integration Test - Auth Register', () => {
-        it('should return status code 200 for register user', (done) => {
-            let new_user = {
-                name: "username",
-                password: "Hello1234.",
-                email: "username@uc.cl"
-            }
-        chai.request('http://localhost:3000')
-            .post('/auth/register')
-            .send(new_user)
-            .end((err, res) => {
-                    res.should.have.status(200);
-                done();
-            });
-    })});
+    // describe('Integration Test - Auth Register', () => {
+    //     it('should return status code 200 for register user', (done) => {
+    //         let new_user = {
+    //             name: "username",
+    //             password: "Hello1234.",
+    //             email: "username@uc.cl"
+    //         }
+    //     chai.request('http://localhost:3000')
+    //         .post('/auth/register')
+    //         .send(new_user)
+    //         .end((err, res) => {
+    //                 res.should.have.status(200);
+    //             done();
+    //         });
+    // })});
 
     // describe('Integration Test - User Login', () => {
     //     it('should return status code 200 for user login', (done) => {
