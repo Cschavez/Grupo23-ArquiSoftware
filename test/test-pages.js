@@ -36,7 +36,7 @@ describe("Unit Tests - Rooms", () => {
 })
 
 //INTEGRATION TESTS
-
+ 
     // describe('Integration Test - Auth Register', () => {
     //     it('should return status code 200 for register user', (done) => {
     //         let new_user = {
