@@ -13,7 +13,7 @@ describe("Unit Tests - Rooms", () => {
 
 	it("should post a new room", async ()=> {
         rooms.roomsPost("python").then((new_room) => {
-            assert.equal(new_room.data.args.name, "python");
+            assert.equal(new_room.data.args.name, "holn");
         });
     })
     
