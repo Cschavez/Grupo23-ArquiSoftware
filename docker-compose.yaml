@@ -5,7 +5,7 @@ services:
     build: .
     environment:
       NODE_ENV: production
-      DB_HOST: database-arqui.cccg1xxfc2ht.us-east-1.rds.amazonaws.com
+      DB_HOST: $DB_HOST
       DB_PORT: 5432
       DB_NAME: postgres
       DB_USERNAME: postgres
