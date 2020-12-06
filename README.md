@@ -4,46 +4,23 @@
 
 [https://myfirstchatapp.me/](https://www.myfirstchatapp.me/)
 
+
 ## Sección mínima
 
-### Autenticación
+1.- (10pts) Implemente el proyecto de "infraestructura como código" para montar su sistema actual en un nuevo ambiente. 2.- (5pts) Documente el código realizado
+para implementar la estructura de su "IaaC" y comente dónde existe espacio de mejora. (Hint: probablemente exista un espacio en donde se podría reutilizar código
+si quisiera crear un ambiente de staging y uno productivo)
 
-### CI/CD
+### Logrado
 
-### Documentación
+### Documentación IaaC
 
-Los documentos se encuentran en la carpeta docs
+![Diagrama Iaac Backend](cloudformation.PNG)
 
-- \*\*RF1 Debe documentar con diagramas de componentes el sistema a fines de esta entrega. (LOGRADO)
+El objetivo de aplicar IaaC en esta entrega, fue replicar nuestra infraestructura en Backend de la entrega anterior. De esta manera, se puede tener un ambiente de staging en el cual se puede utilizar para verificar que la aplicación esté funcionando correctamente.
 
-- \*\*RF2 Debe documentar con diagramas de flujo los procesos de log in/sign up, envío de mensajes (considerando todos los procesos que ocurran a partirde ahí). (LOGRADO)
+Primero creamos un nuevo Auto Scaling Group llamado ‘myASG’. Este lo asociamos con un Launch Template ‘myLaunchTemplate’ que nos permite obtener la imagen a partir de la cual se crean las nuevas instancias. La AMI asociada fue creada a partir de la instancia original con la que se trabajó en entregas pasadas. Además, ‘myASG’ fue asociado con un Target Group para trabajar con un Load Balancer. El Load Balancer Listener está monitoreando constantemente la carga del Load Balancer, de forma que a través de los Targets Groups es capaz de redirigir las solicitudes de clientes a instancias menos cargadas. También, se replicaron las características de seguridad de las configuraciones originales.
 
-- \*\*RF3 Debe documentar con diagramas el proceso de despliegue. (LOGRADO)
+Creamos una nueva base de datos usando RDS en postgres, llamada ‘RDSDATABASE’, la cual se configuró con su respectivo grupo de seguridad, el que permite el tráfico de entrada y salida para las instancias del Auto Scaling Group.
 
-- \*\*RF4 Debe documentar todas las posibles llamadas a sus APIs con algún estandar (Postman, Swagger u otra) (LOGRADO) (https://documenter.getpostman.com/view/10613962/TVejiqnR)
-
-## Sección Variable
-
-### CRUD Admin.
-
-- \*\*RF1 Se implementa un menu para acceder a la información de los usuarios. Se puede revisar y modificar la información de éstos y bloquear el acceso("borrar"). De ser necesario, debe interactuar con el sistema de auth implementado en la sección de Autenticación. (LOGRADO)
-
-- \*\*RF2 Se implementa el menú para manejar grupos. Se pueden cerrar grupos, dejar públicos o privados. (se pueden crear salas públicas, y eliminar salas)
-
-- \*\*RF3 Se implementa el CRUD mensajes. Como admin puede enviar mensajes en grupos, ver y modificar los mensajes e incluye la censura de ellos. Almodificar o censurar los mensajes no se puede perder el mensaje original. (NO LOGRADO)
-
-### CSS/Javascript injection
-
-### Encriptación
-
-- **RF1: Salas Privadas**
-  Se crearon salas privadas donde un usuario deberá hacer click en el nombre y esperar a que el creador de aquella sala le de permiso para entrar. El permiso se manda como un mensaje en el chat que solo el creador puede ver y tiene dos botones: 'Aceptar' y 'Rechazar'. Si acepta, el usuario que pidió entrar será unido a la sala.
-
-- **RF2: Encriptación end-to-end**
-  Se implementó un servidor 'Vault' con una Transit Secrets Engine que funcionará como un servicio. Funciona de la siguiente manera:
-
-  - Enprimer lugar se crea una policy para encriptar y desencriptar mensajes sin guardarlos en la máquina y se habilita la 'transit secret engine'.
-  - Luego, dentro de la app se manda un request http 'pidiendo' una token de acceso como cliente al servidor de vault. Esta token solo permite encriptar y desencriptar algun mensaje, no permite borrar o crear 'secretos' ni modificar el servidor. El request utiliza una llave 'root' que permite crear tokens de cliente. Esta se encuentra en el docker-compose como `VAULT_TOKEN`.
-  - Una vez teniendo la token se procede a realizar un último request http 'pidiendo' encriptar un mensaje a lo que el servidor de vault enviará como respuesta el mensaje codificado. Este mensaje es guardado en la BDD.
-
-  Todo lo anterior se lleva a cabo en el backend y al frontend solo se envían los mensajes desencriptados.
+Creamos un dominio nuevo para el Auto Scaling Group para poder probar el correcto funcionamiento de la API: [https://servermyfirstchatapp.tk/](https://servermyfirstchatapp.tk/)
