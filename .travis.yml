@@ -5,6 +5,7 @@ node_js:
 sudo: required
 services:
   - docker 
+  - postgresql
 branches:
   only:
     - master
@@ -14,6 +15,9 @@ install:
 - npm install mocha chai 
 - npm install request
 - npm install chai-http
+
+before_script:
+  - psql -c 'create database travis_ci_test;' -U postgres
 
 script:
 - docker-compose up -d 
