@@ -18,7 +18,7 @@ install:
 
 before_script:
 - psql -c 'create database travis_ci_test;' -U postgres
-- psql -c "CREATE USER $DB_NAME WITH PASSWORD $DB_PASSWORD;" -U postgres
+- psql -c "CREATE USER $DB_USERNAME WITH PASSWORD $DB_PASSWORD ;" -U postgres
 
 
 script:
