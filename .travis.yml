@@ -14,7 +14,7 @@ install:
 
 script:
 - docker-compose up -d 
-- docker-compose npm test
+- npm test
 - docker-compose down
 - echo "success tests!"
 - sed -i -e 's/\r$/\n/' scripts/installDependencies.sh
