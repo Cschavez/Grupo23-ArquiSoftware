@@ -13,7 +13,7 @@ describe("Unit Tests - Rooms", () => {
 
 	it("should post a new room", async () => {
         const new_room = await rooms.roomsPost("python");
-        assert.strictEqual(new_room.name, "python");
+        assert.strictEqual(new_room.name, "prueba");
     })
     
     it("should get a room", async ()=> {
