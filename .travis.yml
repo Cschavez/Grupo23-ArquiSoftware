@@ -19,7 +19,7 @@ install:
 
 before_script:
 - npm install
-- psql -c 'create database postgres;' -U postgres
+- psql -c 'create database DATABASE;' -U postgres
 
 script:
 - docker-compose up -d 
