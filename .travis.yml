@@ -16,8 +16,6 @@ install:
 - npm install request
 - npm install chai-http
 
-before_script:
-- psql --dbname=$DB_NAME --file=sql/create-tables.sql
 
 script:
 - docker-compose up -d 
