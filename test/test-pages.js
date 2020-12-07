@@ -11,20 +11,22 @@ chai.use(chaiHttp);
 
 describe("Unit Tests - Rooms", () => {
 
-	it("should post a new room", async () => {
-        const new_room = await rooms.roomsPost("python");
-        assert.strictEqual(new_room.name, "python");
+    it("should post a new room", async ()=> {
+        rooms.roomsPost("python").then((new_room) => {
+            assert.equal(new_room.data.args.name, "python");
+        });
     })
     
     it("should get a room", async ()=> {
-        const new_room = await rooms.roomsPost("java");
-        const room = await rooms.roomGet(new_room.id);
-        assert.equal(new_room.id,room.id);
+        rooms.roomsPost("java").then((new_room) => {
+            rooms.roomGet(new_room.data.args.id).then((room)=> {
+            assert.equal(new_room.id,room.id);
+        })
+        })
     })
     
-
-})
-
+})	
+    
 //INTEGRATION TESTS
  
     describe('Integration Test - Auth Register', () => {
