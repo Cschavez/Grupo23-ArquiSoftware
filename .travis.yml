@@ -17,7 +17,7 @@ install:
 
 before_script:
 - psql -c 'create database DATABASE;' -U postgres
-- psql -c 'ALTER USER postgres PASSWORD postgres;'
+- psql -c 'ALTER USER postgres PASSWORD 'postgres';' -U postgres
 
 script:
 - npm test
