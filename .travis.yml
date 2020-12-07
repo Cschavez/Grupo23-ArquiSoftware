@@ -17,7 +17,6 @@ install:
 - npm install chai-http
 
 before_script:
-- psql --command="CREATE USER ${DB_USERNAME};"
 - psql --command="CREATE DATABASE ${DB_NAME} WITH OWNER = ${DB_USERNAME};"
 - psql --dbname=$DB_NAME --file=sql/create-tables.sql
 
