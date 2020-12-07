@@ -1,6 +1,6 @@
 lenguage: node_js
 node_js:
-    - 'stable'
+    - 'node'
 
 sudo: required
 services:
@@ -17,6 +17,7 @@ install:
 
 before_script:
 - psql -c 'create database DATABASE;' -U postgres
+- psql -c 'ALTER USER postgres PASSWORD postgres;'
 
 script:
 - npm test
