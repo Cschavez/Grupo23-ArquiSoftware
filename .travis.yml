@@ -12,10 +12,14 @@ branches:
 
 install:
 - docker-compose build
+- npm install
 - npm install mocha chai 
 - npm install request
 - npm install chai-http
 
+before_script:
+- npm install
+- psql -c 'create database postgres;' -U postgres
 
 script:
 - docker-compose up -d 
