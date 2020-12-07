@@ -1,10 +1,9 @@
 lenguage: node_js
 node_js:
-    - "node"
+    - 'stable'
 
 sudo: required
 services:
-  - docker 
   - postgresql
 branches:
   only:
@@ -17,7 +16,6 @@ install:
 - npm install chai-http
 
 before_script:
-- npm install
 - psql -c 'create database DATABASE;' -U postgres
 
 script:
