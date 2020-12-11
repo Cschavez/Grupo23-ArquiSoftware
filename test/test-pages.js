@@ -40,7 +40,7 @@ describe("Unit Tests - Rooms", () => {
             .post('/auth/register')
             .send(new_user)
             .end((err, res) => {
-                    res.should.have.status(200);
+                    res.should.have.status(400);
                 done();
             });
     })});
